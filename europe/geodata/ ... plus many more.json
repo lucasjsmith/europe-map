@@ -1,0 +1,229 @@
+var rome1 = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.24623799999995,
+                    41.799887,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Leonardo da Vinci International Airport",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.502005000000054,
+                    41.90155600000001,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Roma Termini",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.453804300000002,
+                    41.9086135,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Pensione, Via Santamaura, 48",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.4532014,
+                    41.9093816,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Market",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.452391000000034,
+                    41.909918000000005,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Angelini Bar & Food",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.453936999999996,
+                    41.902167,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "St. Peter's Basilica",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.466275999999993,
+                    41.903063,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Castel Sant'Angelo",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.468202,
+                    41.907726,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Pizza near here",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.466949000000001,
+                    41.909204,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Gelateria dei Gracchi",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.476358000000006,
+                    41.910704,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Piazza del Popolo",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.476311000000011,
+                    41.91145,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Basilica Parrocchiale Santa Maria del Popolo",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.476474000000053,
+                    41.9098,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Santa Maria dei Miracoli",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.477127999999993,
+                    41.909834,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Santa Maria di Montesanto",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.48215,
+                    41.9057505,
+                    0
+                ]
+            },
+            "properties": {
+                "placeName": "Spanish Steps",
+                "styleUrl": "#icon-503-DB4436",
+                "styleHash": "1027d25d"
+            }
+        }
+    ]
+};

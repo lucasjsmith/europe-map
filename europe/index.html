@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Leaflet -->
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	
+	<!-- icons -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
+	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+	<link rel="stylesheet" href="leaflet/AwesomeMarkers/dist/leaflet.awesome-markers.css">
+	<script src="leaflet/AwesomeMarkers/dist/leaflet.awesome-markers.js"></script>
+
+	<!-- fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Rambla:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+	<!-- my data -->
+	<script src="geodata/points.min.js"></script>
+	<script src="geodata/lines.min.js"></script>
+	<script src="geodata/dayData.json"></script>
+	<script src="geodata/iconLookup.js"></script>
+
+
+	<title>IML-400 Final Project</title>
+
+	<style type="text/css">
+		#map{
+			position: absolute;
+			top: 0;
+			left: 0;
+			height:100%;
+			width: 100%;
+			padding: 0;
+		}
+		.overlay {
+			position:absolute; 
+
+		}
+		.overlay div{
+			padding: 6px 10px;
+			font: 18px "Rambla", sans-serif;
+			color: #223;
+			background-color:rgba(255,255,255,1);
+			box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+			border-radius: 3px;
+		}
+		.title {
+			font-family: "Rambla",sans-serif;
+			font-weight: 400;
+			top:10px;
+			left:30px;
+		}
+		.overlay h1{
+			padding: 0;
+			margin: 0;
+			font-size: 30px;
+		}
+		.overlay p {
+			margin: 0;
+		}
+		.overlay a{
+			text-decoration: none;
+			color:black;
+		}
+
+		.daycontrol {
+			text-align: center;
+			bottom: 30px;
+			left: 30px;
+		}
+		.daycontrol #day{
+			width: 80px;
+		}
+		.daycontrol #day h3{
+			font-size: 22px;
+			margin: 0;
+			font-weight: normal;
+			margin: 5px;
+		}
+		.daycontrol #day h2{
+			font-size: 50px;
+			font-weight: bold;
+			margin-top: 5px;
+			margin-bottom: 0px;
+		}
+		#dayadvance, #dayback{
+			text-align: center;
+			display: inline;
+			float: left;
+			width: 29px;
+			height: 29px;
+			font-size: 28px;
+			padding-bottom: 8px;
+		}
+		.daycontrol div {
+			border: 1px gray solid;
+		}
+
+		.statswrapper {
+			bottom: 30px;
+			right:30px;
+		}
+		.statswrapper div{
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>	
+	<div id="map"></div>
+	
+	<div class="overlay title">
+		<div>
+			<h1>Europe 2014</h1>
+			<p>Lucas Smith</p>
+			<p><a href="/~lucas.smith/IML-400/">IML-400</a></p>
+		</div>
+<!-- 		<div>
+			<a id='overview' href="#">to Overview</a>
+		</div> -->
+	</div>
+
+	<div class="overlay daycontrol">
+		<div id="day">
+			<h3>Day</h3>
+			<h2 id="dayNum">1</h2>
+		</div>
+		<a href="#" id='back'><div id='dayback'>&#10094;</div></a>
+		<a href="#" id='forward'><div id='dayadvance'>&#10095;</div></a>
+	</div> 
+
+	<script>
+		// Create map object 
+		var map = L.map('map', {zoomControl: false, animate: true});//.setView([41.9,12.5], 13);
+		// Set tiles for map
+		var mapboxTiles = L.tileLayer('http://api.tiles.mapbox.com/v4/lucasjsmith.kag2k54j/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibHVjYXNqc21pdGgiLCJhIjoiNXpxQ1B2RSJ9.jCM3epZvHAnpK34CRaW4VA', {attribution: '&copy; Mapbox &copy; OpenStreetMap contributors'}).addTo(map);
+		new L.Control.Zoom({position: 'topright'}).addTo(map);
+		
+		// Set up DayList of day names in order. Also the "day" property of geodata.
+		var dayList = ["SeattleRome","Rome1", "Rome2", "Rome3","Boat1","Boat2", "Boat3", "Boat4", "Boat5","Boat6","Boat7", "Boat8","Boat9","Boat10", "Nice1", "Nice2","Boat13","Boat14","StTropez","Boat16","Boat17","Toulon","Boat19","Boat20","Boat21","Cadaques","Boat23","Boat24","Barcelona1","Barcelona2","Barcelona3","Vic","VicGirona","Girona","GironaBarcelona","Barcelona4","Barcelona5","BarcelonaParis","Paris2","Paris3","Paris4","ParisColmar","Mulhouse","Freiburg","Paris5","Paris6","ParisSeattle"];
+
+		// Set up map layerGroups list
+		var mapLayerGroups = [];
+
+		// Add these features from GeoJson
+		L.geoJson(points, {
+			onEachFeature: onEachFeature,
+			pointToLayer: pointToLayer
+		});
+		L.geoJson(lines, {
+			onEachFeature: onEachFeature,
+			// style: {"color": "#ff7800", "weight": 5,  "opacity": 0.65}
+		});
+
+		// Run on each added feature
+		function onEachFeature(feature, featureLayer){
+			
+			var popupText = "";
+			// Bind the popup with the name
+			if (feature.properties && feature.properties.name && feature.properties.day) {
+				popupText += feature.properties.name; //+ "<br>Day: " + feature.properties.day;
+			}
+
+			featureLayer.bindPopup(popupText)
+
+			// Work on layerGroups creation - fun stuff mostly based on a StackExchange post.
+			var lg = mapLayerGroups[feature.properties.day];
+
+			if (lg === undefined) {
+				lg = new L.layerGroup();
+				mapLayerGroups[feature.properties.day] = lg;
+ 			}
+
+ 			lg.addLayer(featureLayer);
+		}	 
+
+		// add stylized markers to each point
+		function pointToLayer(feature, latlng) {
+			// deafault style if none found in iconLookupTable
+			var iconText = 'icon: \'circle\', prefix:\'fa\'';
+			// Find fancy marker based on type
+			iconText = eval('iconLookupTable[0].' + feature.properties.type);
+
+			var thisMarker = eval('L.AwesomeMarkers.icon({ ' + iconText + '});');
+	        return L.marker(latlng, {icon: thisMarker});
+	    } 
+		
+	    // advance day when Forward button clicked
+		document.getElementById("forward").onclick = function(){
+			if (currentDay < dayList.length - 1) {
+				currentDay += 1;
+				updateMap(currentDay)
+			}
+			return false;
+		}
+
+		// go back a day when Back button clicked
+		document.getElementById("back").onclick = function(){
+			if (currentDay > 0) {
+				currentDay -= 1;
+				updateMap(currentDay);				
+			}
+			return false;
+		}
+
+		document.getElementById("day").onclick = function(){
+			updateMap(currentDay);
+			return false;
+		}
+
+		// update the map based on the next day to be shown
+		// called by the forward and advance buttons; can be called to jump days.
+		function updateMap(currDay){
+			// choose layers to hide and add
+			var oldLayer = currentLayer;
+			currentLayer = dayList[currDay];
+			//update day number in overlay div
+			document.getElementById("dayNum").innerHTML = "<a href=\"#\">" + currDay.toString() + "</a>";
+			//switch to new layers
+			hideLayer(oldLayer);
+			showLayer(currentLayer);
+			//find bounds (from dayData), set bounds, move to bounds
+			bounds = [[dayData[currDay].bounds[0],dayData[currDay].bounds[1]],[dayData[currDay].bounds[2],dayData[currDay].bounds[3]]];
+			map.fitBounds(bounds, {
+				paddingTopLeft: [210,45],
+				paddingBottomRight: [15,15],
+				animate: true
+			});			
+			// window.location.hash = "" + currDay;
+			window.history.replaceState(null,null,"#" + currDay);
+		}
+
+		// show a layer based on id (day number)
+		function showLayer(id) {
+		    var lg = mapLayerGroups[id];
+		    map.addLayer(lg);   
+		}
+		// hide a layer based on id (day number)
+		function hideLayer(id) {
+		    var lg = mapLayerGroups[id];
+		    map.removeLayer(lg);   
+		}
+
+
+
+		//MAIN LOGIC
+		// Default currentDay - currentDay is the driving force behind everything in terms of state.
+		var currentDay = 1;
+		// Set currentLayer based on currentLayer
+		var currentLayer = dayList[currentDay];
+
+		// Get day to load from url hash
+		var url = document.URL;
+		if (url.indexOf("#") > -1 && url.length - url.indexOf('#') > 1) {
+			if (parseInt(url.substring(url.indexOf('#')+1, url.length)) > -1 && parseInt(url.substring(url.indexOf('#')+1, url.length)) < 47) {
+				currentDay = parseInt(url.substring(url.indexOf('#')+1, url.length));
+			}
+		}
+
+		//initiate with first day
+		updateMap(currentDay);
+
+	</script>
+
+</body>
+</html>

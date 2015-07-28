@@ -1,0 +1,86 @@
+var iconLookup = [
+	{
+		'id': 'airport'
+		'icon': 'plane',
+		'prefix': 'fa',
+		'markerColor': 'cadetblue'
+	},
+	{
+		'id': 'station'
+		'icon': 'bus',
+		'prefix': 'fa',
+		'markerColor': 'cadetblue'
+	},
+	{
+		'id': 'hotel'
+		'icon': 'home',
+		'prefix': 'glyphicon',
+		'markerColor': 'cadetblue'
+	},
+	{
+		'id': 'food'
+		'icon': 'cutlery',
+		'prefix': 'glyphicon',
+		'markerColor': 'orange'
+	},
+	{
+		'id': 'church'
+		'icon': 'circle',
+		'prefix': 'fa',
+		'markerColor': 'blue'
+	},
+	{
+		'id': 'poi'
+		'icon': 'circle',
+		'prefix': 'fa',
+		'markerColor': 'blue'
+	},
+	{
+		'id': 'gelato'
+		'icon': 'icecream',
+		'prefix': 'fa',
+		'markerColor': 'orange'
+	},
+	{
+		'id': 'cafe'
+		'icon': 'coffee',
+		'prefix': 'fa',
+		'markerColor': 'orange'
+	},
+	{
+		'id': 'museum'
+		'icon': 'university',
+		'prefix': 'fa',
+		'markerColor': 'blue'
+	},
+	{
+		'id': 'boat'
+		'icon': 'anchor',
+		'prefix': 'fa',
+		'markerColor': 'cadetblue'
+	},
+	{
+		'id': 'mundial'
+		'icon': 'football-o',
+		'prefix': 'fa',
+		'markerColor': 'green'
+	},
+	{
+		'id': 'bus'
+		'icon': 'bus',
+		'prefix': 'fa',
+		'markerColor': 'cadetblue'
+	},
+	{
+		'id': 'bar'
+		'icon': 'beer',
+		'prefix': 'ion',
+		'markerColor': 'orange'
+	},
+	{
+		'id': 'bike'
+		'icon': 'bike',
+		'prefix': 'fa',
+		'markerColor': 'cadetblue'
+	}
+]
